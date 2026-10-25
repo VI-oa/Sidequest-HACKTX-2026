@@ -6,6 +6,8 @@
   <title>Sidequest</title>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
+  <link rel="stylesheet" href="intro.css">
+  <script src="intro.js" defer data-duration="4500"></script>
 </head>
 <body>
   <header>
@@ -30,5 +32,27 @@
       </article>
     </section>
   </main>
+  <dialog id="plan-dialog" aria-labelledby="plan-title">
+    <form id="plan-form">
+        <h2 id="plan-title">What are you up for?</h2>
+
+        <label for="plan-description">Your idea</label>
+        <textarea
+        id="plan-description"
+        name="description"
+        placeholder="Coffee, drawing, a little company…"
+        required
+        ></textarea>
+
+        <label for="plan-mode">How do you want to hang out?</label>
+        <select id="plan-mode" name="mode">
+        <option value="virtual">Virtual</option>
+        <option value="in-person">In person</option>
+        </select>
+
+        <button type="submit">Create plan</button>
+        <button type="button" id="cancel-button">Cancel</button>
+    </form>
+    </dialog>
 </body>
 </html>

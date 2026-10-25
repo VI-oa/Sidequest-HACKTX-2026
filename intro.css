@@ -1,0 +1,12 @@
+/* Full-screen intro overlays your existing site; the site loads underneath. */
+#sidequest-intro { position: fixed; inset: 0; z-index: 2147483647; background: #05060a; color: #f2efe9; opacity: 1; transition: opacity 240ms ease; font-family: ui-monospace, Menlo, Consolas, monospace; }
+#sidequest-intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+#sidequest-intro .sq-intro-heading { position: absolute; top: max(30px, env(safe-area-inset-top)); left: max(28px, env(safe-area-inset-left)); right: max(28px, env(safe-area-inset-right)); display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+#sidequest-intro strong { font-size: 20px; font-weight: 500; letter-spacing: .06em; }
+#sidequest-intro .sq-intro-heading > span { font-size: 11px; color: #a8afbd; }
+#sidequest-intro .sq-intro-skip { position: absolute; right: max(28px, env(safe-area-inset-right)); bottom: max(28px, env(safe-area-inset-bottom)); background: #15171de6; border: 1px solid #5a606e; border-radius: 24px; padding: 12px 20px; min-height: 44px; color: #f2efe9; cursor: pointer; font: 12px ui-monospace, monospace; }
+#sidequest-intro .sq-intro-skip span { margin-left: 16px; }
+#sidequest-intro .sq-intro-skip:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+#sidequest-intro.sq-intro-exit { opacity: 0; pointer-events: none; }
+@media (max-width: 540px) { #sidequest-intro .sq-intro-heading { flex-direction: column; align-items: flex-start; gap: 9px; } }
+@media (prefers-reduced-motion: reduce) { #sidequest-intro { transition: none; } }
