@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your people · Sidequest</title>
+  <link rel="stylesheet" href="people.css">
+  <script src="people.js" defer></script>
+</head>
+
+<body>
+  <header class="page-header">
+    <a class="logo" href="./index.html">sidequest</a>
+    <a class="back-link" href="./index.html">Back to your circle</a>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <p class="eyebrow">MAKE TIME FOR YOUR PEOPLE</p>
+      <h1>Your people.</h1>
+      <p>Shared interests. Small invitations. A little closer.</p>
+    </section>
+
+    <section class="my-profile" aria-labelledby="my-name">
+      <div class="avatar large" id="my-avatar">Z</div>
+
+      <div class="my-details">
+        <p class="eyebrow">YOUR PROFILE</p>
+        <h2 id="my-name"></h2>
+        <p id="my-bio"></p>
+        <ul class="interests" id="my-interests"></ul>
+      </div>
+
+      <button type="button" id="edit-button">Edit profile</button>
+    </section>
+
+    <section aria-labelledby="discover-heading">
+      <div class="section-heading">
+        <h2 id="discover-heading">Find your circle</h2>
+        <span id="following-count"></span>
+      </div>
+
+      <label class="search-label" for="people-search">
+        Search names or interests
+      </label>
+
+      <input
+        id="people-search"
+        class="field"
+        type="search"
+        placeholder="Photography, music, Maya…"
+      >
+
+      <div class="filters" aria-label="Filter people">
+        <button
+          type="button"
+          data-filter="all"
+          aria-pressed="true"
+        >Everyone</button>
+
+        <button
+          type="button"
+          data-filter="following"
+          aria-pressed="false"
+        >Following</button>
+      </div>
+
+      <div class="people-grid" id="people-grid"></div>
+      <p class="empty" id="empty-message" hidden>No matching people.</p>
+
+      <p class="demo-note">
+        Prototype: these are sample profiles.
+        Follow choices stay in this browser.
+      </p>
+    </section>
+  </main>
+
+  <dialog id="edit-dialog" aria-labelledby="edit-heading">
+    <form id="edit-form">
+      <h2 id="edit-heading">A little about you.</h2>
+
+      <label for="edit-name">Name</label>
+      <input
+        class="field"
+        id="edit-name"
+        maxlength="50"
+        required
+      >
+
+      <label for="edit-bio">Bio</label>
+      <textarea
+        class="field"
+        id="edit-bio"
+        maxlength="200"
+        rows="3"
+      ></textarea>
+
+      <label for="edit-interests">Interests, separated by commas</label>
+      <input
+        class="field"
+        id="edit-interests"
+        maxlength="150"
+        placeholder="Art, Music, Games"
+      >
+
+      <div class="actions">
+        <button type="submit">Save changes</button>
+        <button type="button" class="secondary" id="cancel-edit">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="person-dialog" aria-labelledby="person-heading">
+    <div id="person-content"></div>
+
+    <button type="button" class="secondary" id="close-person">
+      Back to your people
+    </button>
+  </dialog>
+
+  <p id="status" role="status" aria-live="polite"></p>
+</body>
+</html>

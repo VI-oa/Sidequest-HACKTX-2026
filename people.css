@@ -1,0 +1,365 @@
+:root {
+  color-scheme: dark;
+  --background: #0b0b0c;
+  --surface: #202022;
+  --border: #36363a;
+  --text: #f3f2ef;
+  --muted: #a3a3ac;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-header,
+main {
+  width: min(100% - 40px, 1000px);
+  margin-inline: auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-block: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+.back-link {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+main {
+  padding-block: 42px;
+}
+
+.page-intro {
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+h1 {
+  margin: 12px 0;
+  font-size: clamp(36px, 7vw, 56px);
+  letter-spacing: -2px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 23px;
+  letter-spacing: -0.5px;
+}
+
+p {
+  line-height: 1.7;
+}
+
+.page-intro > p:last-child,
+#my-bio,
+.person-bio {
+  color: var(--muted);
+}
+
+.my-profile,
+.person-card {
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.my-profile {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 44px;
+}
+
+.my-details {
+  flex: 1;
+  min-width: 180px;
+}
+
+.my-details .eyebrow {
+  margin-top: 0;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid #626269;
+  border-radius: 50%;
+  background: #303034;
+  color: var(--text);
+  font-size: 21px;
+}
+
+.avatar.large {
+  width: 84px;
+  height: 84px;
+  font-size: 32px;
+}
+
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 16px 0;
+  list-style: none;
+}
+
+.interests li,
+.relationship {
+  padding: 7px 11px;
+  border: 1px solid #4a4a50;
+  border-radius: 20px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+#following-count {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.search-label,
+form label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.field {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  background: var(--text);
+  color: var(--background);
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+
+.secondary,
+.filters button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-block: 20px;
+}
+
+.filters button[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--background);
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.person-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.person-card h3 {
+  margin: 18px 0 4px;
+  font-size: 20px;
+}
+
+.username {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.person-bio {
+  font-size: 13px;
+}
+
+.person-card .actions {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demo-note,
+.empty {
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+dialog {
+  width: min(480px, calc(100% - 32px));
+  max-height: 90dvh;
+  padding: 28px;
+  overflow-y: auto;
+  border: 1px solid #505057;
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 75%);
+}
+
+#edit-form {
+  display: grid;
+  gap: 12px;
+}
+
+#edit-form label {
+  margin: 8px 0 0;
+}
+
+#edit-form .actions {
+  margin-top: 12px;
+}
+
+#person-content {
+  margin-bottom: 24px;
+}
+
+#person-content h2 {
+  margin-top: 20px;
+}
+
+#status {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 32px);
+  margin: 0;
+  padding: 12px 20px;
+  border: 1px solid #55555c;
+  border-radius: 24px;
+  background: #29292e;
+  font-size: 12px;
+  text-align: center;
+}
+
+#status:empty {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .people-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .my-profile,
+  .person-card {
+    padding: 22px;
+  }
+
+  .my-profile > button {
+    width: 100%;
+  }
+
+  .back-link {
+    font-size: 11px;
+  }
+}

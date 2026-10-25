@@ -1,58 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sidequest</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" href="intro.css">
-  <script src="intro.js" defer data-duration="4500"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sidequest</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="intro.css">
+    <script src="intro.js" defer data-duration="4500"></script>
 </head>
+
 <body>
-  <header>
-    <a class="logo" href="./index.html">sidequest ✦</a>
-    <button type="button" id="create-button">+ Make a plan</button>
-  </header>
+    <header>
+        <a class="logo" href="./index.html">sidequest</a>
+        <a class="header-link" href="./profile.html">My profile</a>
+        <button type="button" id="create-button">+ Make a plan</button>
+        <a class="header-link" href="./people.html">Your people</a>
+        <a class="header-link" href="./planner.html">AI planner</a>
+        <a class="header-link" href="./calendar.html">My plans</a>
+    </header>
 
-  <main>
-    <h1>Your circle</h1>
-    <p class="subtitle">Good people. Small plans. A little closer.</p>
-
-    <section class="feed" aria-label="Friends’ plans">
-      <article class="post">
-        <p class="author">Maya Chen · Close friends</p>
-        <h2>Dinner, anyone?</h2>
-        <p>Trying a new recipe tonight. Come cook with me.</p>
-
-        <div class="post-footer">
-          <span>Tonight · In person</span>
-          <button type="button">Ask to join</button>
+    <main>
+        <h1>Your circle</h1>
+        <p class="subtitle">Good people. Small plans. A little closer.</p>
+        <div class="filters" aria-label="Filter plans">
+            <button type="button" data-filter="all">All plans</button>
+            <button type="button" data-filter="virtual">Virtual</button>
+            <button type="button" data-filter="in-person">In person</button>
         </div>
-      </article>
-    </section>
-  </main>
-  <dialog id="plan-dialog" aria-labelledby="plan-title">
-    <form id="plan-form">
-        <h2 id="plan-title">What are you up for?</h2>
+        <section class="feed" aria-label="Friends’ plans">
+            <article class="post" data-mode="in-person">
+                <p class="author">
+                    <a class="header-link" href="./person.html">Maya Chen</a>
+                    · Close friends
+                </p>
 
-        <label for="plan-description">Your idea</label>
-        <textarea
-        id="plan-description"
-        name="description"
-        placeholder="Coffee, drawing, a little company…"
-        required
-        ></textarea>
+                <div class="post-footer">
+                    <span>Tonight · In person</span>
+                    <button type="button" id="join-button">Ask to join</button>
+                </div>
+            </article>
+        </section>
+    </main>
+    <dialog id="plan-dialog" aria-labelledby="plan-title">
+        <form id="plan-form">
+            <h2 id="plan-title">What are you up for?</h2>
 
-        <label for="plan-mode">How do you want to hang out?</label>
-        <select id="plan-mode" name="mode">
-        <option value="virtual">Virtual</option>
-        <option value="in-person">In person</option>
-        </select>
+            <label for="plan-description">Your idea</label>
+            <textarea id="plan-description" name="description" placeholder="Coffee, drawing, a little company…"
+                required></textarea>
 
-        <button type="submit">Create plan</button>
-        <button type="button" id="cancel-button">Cancel</button>
-    </form>
+            <label for="plan-mode">How do you want to hang out?</label>
+            <select id="plan-mode" name="mode">
+                <option value="virtual">Virtual</option>
+                <option value="in-person">In person</option>
+            </select>
+
+            <button type="submit">Create plan</button>
+            <button type="button" id="cancel-button">Cancel</button>
+        </form>
     </dialog>
 </body>
+
 </html>

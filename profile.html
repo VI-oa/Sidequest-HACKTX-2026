@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your profile · Sidequest</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="profile.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a class="logo" href="./index.html">sidequest</a>
+        <a href="./index.html">Back to your circle</a>
+    </header>
+
+    <main>
+        <section class="profile" aria-labelledby="profile-name">
+            <div class="profile-avatar" aria-hidden="true">Z</div>
+
+            <h1 id="profile-name">Ziying</h1>
+            <p class="subtitle">@ziying</p>
+            <p>Creating things, exploring places, and making time for friends.</p>
+
+            <h2>Interests</h2>
+            <ul class="profile-interests">
+                <li>Art</li>
+                <li>Music</li>
+                <li>Games</li>
+            </ul>
+
+            <button type="button" id="edit-profile-button">
+                Edit profile
+            </button>
+        </section>
+    </main>
+    <dialog id="profile-dialog" aria-labelledby="edit-profile-title">
+        <form id="profile-form">
+            <h2 id="edit-profile-title">Edit your profile</h2>
+
+            <label for="edit-name">Name</label>
+            <input id="edit-name" name="name" type="text" maxlength="50" value="Ziying" required>
+
+            <label for="edit-bio">Bio</label>
+            <textarea id="edit-bio" name="bio"
+                maxlength="200">Creating things, exploring places, and making time for friends.</textarea>
+
+            <label for="edit-interests">Interests, separated by commas</label>
+            <input id="edit-interests" name="interests" type="text" maxlength="150" value="Art, Music, Games">
+
+            <button type="submit">Save changes</button>
+            <button type="button" id="cancel-profile-button">Cancel</button>
+        </form>
+    </dialog>
+</body>
+
+</html>

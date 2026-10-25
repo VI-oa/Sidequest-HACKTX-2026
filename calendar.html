@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your plans · Sidequest</title>
+
+    <link rel="stylesheet" href="people.css">
+    <script src="calendar.js" defer></script>
+
+    <style>
+        .calendar-card {
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--surface);
+        }
+
+        .calendar-card p {
+            color: var(--muted);
+            overflow-wrap: anywhere;
+        }
+
+        .schedule-fields {
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            gap: 16px;
+            margin-block: 22px;
+        }
+
+        .schedule-fields label {
+            display: grid;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .calendar-card .actions {
+            margin-top: 18px;
+        }
+
+        .calendar-card .saved-time {
+            color: var(--text);
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .schedule-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-card .actions button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="page-header">
+        <a class="logo" href="./index.html">sidequest ✦</a>
+        <a class="back-link" href="./index.html">Back to your circle</a>
+    </header>
+
+    <main>
+        <section class="page-intro">
+            <p class="eyebrow">SOMETHING TO LOOK FORWARD TO</p>
+            <h1>Make time.</h1>
+            <p>Your ideas deserve a place on your calendar.</p>
+            <p id="timezone"></p>
+        </section>
+
+        <section id="calendar-plans" aria-label="Your saved plans"></section>
+
+        <p id="empty-message" class="empty" hidden>
+            No saved plans yet.
+            <a href="./planner.html">Make a plan with AI →</a>
+        </p>
+
+        <p class="demo-note">
+            Calendar events are personal copies. Changes here do not
+            automatically update your calendar or send invitations to friends.
+        </p>
+    </main>
+
+    <p id="status" role="status" aria-live="polite"></p>
+</body>
+
+</html>

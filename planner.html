@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Make a plan · Sidequest</title>
+
+    <link rel="stylesheet" href="people.css">
+    <script src="planner.js" defer></script>
+
+    <style>
+        .planner-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .planner-panel {
+            padding: 26px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        #planner-form {
+            display: grid;
+            gap: 14px;
+        }
+
+        #planner-form label {
+            margin: 0;
+        }
+
+        .friend-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .friend-options label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #result-description,
+        #result-why,
+        #result-steps {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        #result-source {
+            font-family: monospace;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        #planner-status {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: wait;
+        }
+
+        @media (max-width: 750px) {
+            .planner-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="page-header">
+        <a class="logo" href="./index.html">sidequest</a>
+        <a class="back-link" href="./index.html">Back to your circle</a>
+    </header>
+
+    <main>
+        <section class="page-intro">
+            <p class="eyebrow">FIND A LITTLE OVERLAP</p>
+            <h1>Make time, together.</h1>
+            <p>Bring an idea. Find something worth doing with your people.</p>
+        </section>
+
+        <div class="planner-layout">
+            <section class="planner-panel">
+                <form id="planner-form">
+                    <label for="idea">What are you up for?</label>
+                    <textarea class="field" id="idea" maxlength="600" rows="4"
+                        placeholder="I want company, but I’m staying in tonight…" required></textarea>
+
+                    <label for="mode">How do you want to hang out?</label>
+                    <select class="field" id="mode">
+                        <option value="virtual">Virtual</option>
+                        <option value="in-person">In person</option>
+                    </select>
+
+                    <label for="minutes">Time together</label>
+                    <select class="field" id="minutes">
+                        <option value="15">15 minutes</option>
+                        <option value="30" selected>30 minutes</option>
+                        <option value="60">1 hour</option>
+                    </select>
+
+                    <label for="budget">Maximum cost per person</label>
+                    <select class="field" id="budget">
+                        <option value="0">Free</option>
+                        <option value="5">$5</option>
+                        <option value="10">$10</option>
+                    </select>
+
+                    <fieldset>
+                        <legend>Plan around these sample friends</legend>
+
+                        <div class="friend-options">
+                            <label>
+                                <input type="checkbox" name="friend" value="maya">
+                                Maya
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="friend" value="alex">
+                                Alex
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="friend" value="jamie">
+                                Jamie
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <p class="demo-note">
+                        Generating with Meta sends your idea and selected sample
+                        friends’ interests to Meta. It does not send messages or
+                        automatically invite anyone.
+                    </p>
+
+                    <button type="submit" id="generate-button">
+                        ✦ Generate with Meta
+                    </button>
+
+                    <button type="button" class="secondary" id="sample-button">
+                        Try a sample while waiting for credits
+                    </button>
+
+                    <p id="planner-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <section class="planner-panel" id="result" hidden>
+                <p id="result-source"></p>
+                <h2 id="result-title"></h2>
+                <p id="result-description"></p>
+                <p id="result-details"></p>
+
+                <h3>A little plan</h3>
+                <ol id="result-steps"></ol>
+
+                <h3>Why this fits</h3>
+                <p id="result-why"></p>
+
+                <button type="button" id="save-plan">
+                    Save invitation to my feed
+                </button>
+
+                <p class="demo-note">
+                    Saved in this browser. Review the idea with your friends
+                    before making arrangements.
+                </p>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
