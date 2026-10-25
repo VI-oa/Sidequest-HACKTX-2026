@@ -192,7 +192,7 @@ function downloadEvent(plan, start, end) {
         `DTEND:${calendarTimestamp(end)}`,
         `SUMMARY:${escapeCalendarText(titleFor(plan))}`,
         `DESCRIPTION:${escapeCalendarText(plan.description)}`,
-        `LOCATION:${plan.mode === 'Virtual' ? 'Online - agree on a call link' : 'To be agreed'}`,
+        `LOCATION:${escapeCalendarText(plan.location || 'To be agreed')}`,
         'END:VEVENT',
         'END:VCALENDAR'
     ];
@@ -224,9 +224,7 @@ function openGoogleCalendar(plan, start, end) {
         dates:
             `${calendarTimestamp(start)}/${calendarTimestamp(end)}`,
         details: plan.description || '',
-        location: plan.mode === 'Virtual'
-            ? 'Online - agree on a call link'
-            : 'To be agreed'
+        location: plan.location || 'To be agreed'
     });
 
     window.open(

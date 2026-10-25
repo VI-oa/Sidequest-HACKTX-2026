@@ -6,13 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Your profile · Sidequest</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="nav.css">
     <script src="profile.js" defer></script>
 </head>
 
 <body>
-    <header>
-        <a class="logo" href="./index.html">sidequest</a>
-        <a href="./index.html">Back to your circle</a>
+    <header class="site-header">
+        <a class="logo" href="./index.html">sidequest <span class="logo-mark" aria-hidden="true">∞</span></a>
+        <nav class="primary-nav" aria-label="Main navigation">
+            <details class="plan-menu">
+                <summary>Make a plan</summary>
+                <div class="plan-menu-panel">
+                    <a class="plan-menu-item" href="./index.html?create=1"><span>Create a plan</span><small>Share an idea with your circle</small></a>
+                    <a class="plan-menu-item" href="./planner.html"><span>Plan with Meta AI</span><small>Get an idea tailored to your interests</small></a>
+                    <a class="plan-menu-item" href="./connect.html"><span>Plan together</span><small>Connect with friends and find your overlap</small></a>
+                </div>
+            </details>
+            <a class="header-link" href="./people.html">Connections</a>
+            <a class="header-link" href="./calendar.html">My plans</a>
+        </nav>
+        <a class="profile-link" href="./profile.html" aria-current="page">My profile</a>
     </header>
 
     <main>

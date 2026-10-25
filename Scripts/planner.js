@@ -1,30 +1,44 @@
 const form = document.getElementById('planner-form');
 const generateButton = document.getElementById('generate-button');
-const sampleButton = document.getElementById('sample-button');
 const saveButton = document.getElementById('save-plan');
 const status = document.getElementById('planner-status');
 
 let currentPlan = null;
 
-async function generatePlan(sample) {
+function localDateValue(date) {
+  return new Date(
+    date.getTime() - date.getTimezoneOffset() * 60000
+  ).toISOString().slice(0, 16);
+}
+
+const defaultStart = new Date();
+defaultStart.setDate(defaultStart.getDate() + 1);
+defaultStart.setHours(18, 0, 0, 0);
+document.getElementById('plan-start').value = localDateValue(defaultStart);
+
+async function generatePlan() {
   if (!form.reportValidity()) return;
 
   const idea = document.getElementById('idea').value.trim();
+  const startsAt = new Date(document.getElementById('plan-start').value);
+  const location = document.getElementById('plan-location').value.trim();
 
-  if (!idea) {
-    status.textContent = 'Write a little about your idea first.';
+  if (!idea || !location) {
+    status.textContent = 'Add your idea and place or call details first.';
+    return;
+  }
+
+  if (!Number.isFinite(startsAt.getTime()) || startsAt.getTime() <= Date.now()) {
+    status.textContent = 'Choose a future date and time for your plan.';
     return;
   }
 
   generateButton.disabled = true;
-  sampleButton.disabled = true;
   currentPlan = null;
 
   document.getElementById('result').hidden = true;
 
-  status.textContent = sample
-    ? 'Preparing a sample idea…'
-    : 'Finding a little overlap with Meta…';
+  status.textContent = 'Finding a little overlap with Meta…';
 
   try {
     const response = await fetch('/api/plan', {
@@ -39,8 +53,7 @@ async function generatePlan(sample) {
         budget: Number(document.getElementById('budget').value),
         friends: Array.from(
           document.querySelectorAll('[name="friend"]:checked')
-        ).map((input) => input.value),
-        sample
+        ).map((input) => input.value)
       }),
       signal: AbortSignal.timeout(30000)
     });
@@ -89,23 +102,29 @@ async function generatePlan(sample) {
         : error.message;
   } finally {
     generateButton.disabled = false;
-    sampleButton.disabled = false;
   }
 }
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
-  generatePlan(false);
-});
-
-sampleButton.addEventListener('click', () => {
-  generatePlan(true);
+  generatePlan();
 });
 
 saveButton.addEventListener('click', () => {
   if (!currentPlan) return;
 
   try {
+    const startsAt = new Date(document.getElementById('plan-start').value);
+    const location = document.getElementById('plan-location').value.trim();
+
+    if (!Number.isFinite(startsAt.getTime()) || startsAt.getTime() <= Date.now()) {
+      throw new Error('Choose a future date and time for your plan.');
+    }
+
+    if (!location) {
+      throw new Error('Add a place or call detail for your plan.');
+    }
+
     const saved = JSON.parse(
       localStorage.getItem('sidequest-plans') || '[]'
     );
@@ -122,9 +141,22 @@ saveButton.addEventListener('click', () => {
       mode: currentPlan.mode === 'virtual' ? 'Virtual' : 'In person',
       minutes: currentPlan.minutes,
       cost: currentPlan.cost,
+      startsAt: startsAt.toISOString(),
+      location,
+      tags: [
+        ...new Set(
+          document.getElementById('plan-tags').value
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter(Boolean)
+        )
+      ].slice(0, 6),
+      audience: 'everyone',
+      requiresApproval: false,
       steps: currentPlan.steps,
       why: currentPlan.why,
-      source: currentPlan.source
+      source: currentPlan.source,
+      createdAt: new Date().toISOString()
     });
 
     localStorage.setItem('sidequest-plans', JSON.stringify(saved));

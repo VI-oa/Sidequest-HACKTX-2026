@@ -7,6 +7,7 @@
     <title>Make a plan · Sidequest</title>
 
     <link rel="stylesheet" href="people.css">
+    <link rel="stylesheet" href="nav.css">
     <script src="planner.js" defer></script>
 
     <style>
@@ -22,6 +23,17 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 20px;
+        }
+
+        .planner-panel .field {
+            width: 100%;
+            min-height: 44px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--background);
+            color: var(--text);
+            font: inherit;
         }
 
         #planner-form {
@@ -77,9 +89,21 @@
 </head>
 
 <body>
-    <header class="page-header">
-        <a class="logo" href="./index.html">sidequest</a>
-        <a class="back-link" href="./index.html">Back to your circle</a>
+    <header class="page-header site-header">
+        <a class="logo" href="./index.html">sidequest <span class="logo-mark" aria-hidden="true">∞</span></a>
+        <nav class="primary-nav" aria-label="Main navigation">
+            <details class="plan-menu">
+                <summary data-current="true">Make a plan</summary>
+                <div class="plan-menu-panel">
+                    <a class="plan-menu-item" href="./index.html?create=1"><span>Create a plan</span><small>Share an idea with your circle</small></a>
+                    <a class="plan-menu-item" href="./planner.html" aria-current="page"><span>Plan with Meta AI</span><small>Get an idea tailored to your interests</small></a>
+                    <a class="plan-menu-item" href="./connect.html"><span>Plan together</span><small>Connect with friends and find your overlap</small></a>
+                </div>
+            </details>
+            <a class="header-link" href="./people.html">Connections</a>
+            <a class="header-link" href="./calendar.html">My plans</a>
+        </nav>
+        <a class="profile-link" href="./profile.html">My profile</a>
     </header>
 
     <main>
@@ -108,6 +132,17 @@
                         <option value="30" selected>30 minutes</option>
                         <option value="60">1 hour</option>
                     </select>
+
+                    <label for="plan-start">Date and time</label>
+                    <input class="field" id="plan-start" type="datetime-local" required>
+
+                    <label for="plan-location">Place or call details</label>
+                    <input class="field" id="plan-location" type="text" maxlength="200"
+                        placeholder="Campus café, call link, or agree in chat" required>
+
+                    <label for="plan-tags">Tags, separated by commas</label>
+                    <input class="field" id="plan-tags" type="text" maxlength="150"
+                        placeholder="Art, chill, beginner friendly">
 
                     <label for="budget">Maximum cost per person</label>
                     <select class="field" id="budget">
@@ -145,10 +180,6 @@
 
                     <button type="submit" id="generate-button">
                         ✦ Generate with Meta
-                    </button>
-
-                    <button type="button" class="secondary" id="sample-button">
-                        Try a sample while waiting for credits
                     </button>
 
                     <p id="planner-status" role="status" aria-live="polite"></p>

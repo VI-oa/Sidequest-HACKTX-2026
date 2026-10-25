@@ -6,19 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sidequest</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="nav.css">
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="intro.css">
-    <script src="intro.js" defer data-duration="4500"></script>
+    <script src="intro.js" defer data-duration="4500" data-once="local"></script>
 </head>
 
 <body>
-    <header>
-        <a class="logo" href="./index.html">sidequest</a>
-        <a class="header-link" href="./profile.html">My profile</a>
-        <button type="button" id="create-button">+ Make a plan</button>
-        <a class="header-link" href="./people.html">Your people</a>
-        <a class="header-link" href="./planner.html">AI planner</a>
-        <a class="header-link" href="./calendar.html">My plans</a>
+    <header class="site-header">
+        <a class="logo" href="./index.html" aria-label="Sidequest home" aria-current="page">
+            <span>sidequest</span>
+            <span class="logo-mark" aria-hidden="true">∞</span>
+        </a>
+        <nav class="primary-nav" aria-label="Main navigation">
+            <details class="plan-menu" id="plan-menu">
+                <summary>Make a plan</summary>
+                <div class="plan-menu-panel">
+                    <a id="create-button" class="plan-menu-item" href="./index.html?create=1">
+                        <span>Create a plan</span>
+                        <small>Share an idea with your circle</small>
+                    </a>
+                    <a class="plan-menu-item" href="./planner.html">
+                        <span>Plan with Meta AI</span>
+                        <small>Get an idea tailored to your interests</small>
+                    </a>
+                    <a class="plan-menu-item" href="./connect.html">
+                        <span>Plan together</span>
+                        <small>Connect with friends and find your overlap</small>
+                    </a>
+                </div>
+            </details>
+            <a class="header-link" href="./people.html">Connections</a>
+            <a class="header-link" href="./calendar.html">My plans</a>
+        </nav>
+        <a class="profile-link" href="./profile.html">My profile</a>
     </header>
 
     <main>
@@ -30,15 +51,17 @@
             <button type="button" data-filter="in-person">In person</button>
         </div>
         <section class="feed" aria-label="Friends’ plans">
-            <article class="post" data-mode="in-person">
+            <article class="post" data-mode="in-person" data-audience="everyone">
                 <p class="author">
                     <a class="header-link" href="./person.html">Maya Chen</a>
-                    · Close friends
+                    · Everyone · Sample profile
                 </p>
 
+                <h2>Dinner, anyone?</h2>
+                <p>Trying a new recipe. Bring a snack and a story.</p>
                 <div class="post-footer">
                     <span>Tonight · In person</span>
-                    <button type="button" id="join-button">Ask to join</button>
+                    <button type="button" id="join-button" data-approval="false">Join plan</button>
                 </div>
             </article>
         </section>
@@ -56,7 +79,79 @@
                 <option value="virtual">Virtual</option>
                 <option value="in-person">In person</option>
             </select>
+            <div class="plan-fields">
+                <label for="plan-name">Plan title</label>
+                <input id="plan-name" type="text" maxlength="80" placeholder="Coffee and a little sketching" required>
 
+                <div class="plan-field-row">
+                    <div>
+                        <label for="plan-start">Date and time</label>
+                        <input id="plan-start" type="datetime-local" required>
+                    </div>
+
+                    <div>
+                        <label for="plan-duration">Duration</label>
+                        <select id="plan-duration">
+                            <option value="15">15 minutes</option>
+                            <option value="30" selected>30 minutes</option>
+                            <option value="60">1 hour</option>
+                            <option value="90">1½ hours</option>
+                            <option value="120">2 hours</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="plan-place">Place or call details</label>
+                <input id="plan-place" type="text" maxlength="200"
+                    placeholder="Campus café, a call link, or “agree in chat”" required>
+
+                <label for="plan-tags">Tags, separated by commas</label>
+                <input id="plan-tags" type="text" maxlength="150" placeholder="Art, Chill, Beginner friendly">
+            </div>
+            <fieldset class="plan-access">
+                <legend>Visibility and joining</legend>
+                <label for="plan-audience">Who can see this plan?</label>
+                <select id="plan-audience" name="audience" aria-describedby="audience-help">
+                    <option value="everyone">Everyone</option>
+                    <option value="close-friends">Close friends</option>
+                </select>
+                <p id="audience-help" class="upload-note">Everyone can see the plan.</p>
+                <label class="approval-setting" for="plan-approval">
+                    <input id="plan-approval" type="checkbox" name="requiresApproval">
+                    <span>
+                        <strong>Approve people before they join</strong>
+                        <small id="approval-help">Off: people can join immediately.</small>
+                    </span>
+                </label>
+                <p class="prototype-note">Local prototype: settings are saved in this browser. Close-friend access is not enforced until accounts and a shared backend are connected.</p>
+            </fieldset>
+            <label for="plan-image">Add a photo — optional</label>
+
+            <input id="plan-image" type="file" accept="image/jpeg,image/png,image/webp">
+
+            <p class="upload-note">
+                JPG, PNG, or WebP. Maximum original file size: 8 MB.
+            </p>
+            <div id="photo-editor" hidden>
+                <p class="upload-note">
+                    Drag to reposition, or use the sliders below.
+                </p>
+
+                <canvas id="photo-canvas" width="960" height="540" aria-label="Photo crop preview"></canvas>
+
+                <label for="photo-zoom">Zoom</label>
+                <input id="photo-zoom" type="range" min="1" max="3" step="0.01" value="1">
+
+                <label for="photo-x">Horizontal position</label>
+                <input id="photo-x" type="range" min="0" max="1" step="0.01" value="0.5">
+
+                <label for="photo-y">Vertical position</label>
+                <input id="photo-y" type="range" min="0" max="1" step="0.01" value="0.5">
+
+                <button type="button" id="reset-photo" class="secondary">
+                    Reset photo
+                </button>
+            </div>
             <button type="submit">Create plan</button>
             <button type="button" id="cancel-button">Cancel</button>
         </form>

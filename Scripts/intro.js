@@ -4,12 +4,31 @@
   const script = document.currentScript;
   const configured = Number(script?.dataset.duration);
   const duration = Number.isFinite(configured) && configured >= 1000 ? configured : 3000;
-  const once = script?.dataset.once === 'session';
+  const once = script?.dataset.once === 'local';
   function start() {
     if (document.getElementById('sidequest-intro')) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const seenKey = 'sidequest-connection-intro-seen';
-    if (once) { try { if (sessionStorage.getItem(seenKey)) return; } catch {} }
+    const navigationType =
+      performance.getEntriesByType('navigation')[0]?.type;
+    if (once) {
+      try {
+        if (localStorage.getItem(seenKey) && navigationType !== 'reload') {
+          return;
+        }
+        localStorage.setItem(seenKey, '1');
+      } catch {
+        try {
+          if (
+            sessionStorage.getItem(seenKey) &&
+            navigationType !== 'reload'
+          ) {
+            return;
+          }
+          sessionStorage.setItem(seenKey, '1');
+        } catch {}
+      }
+    }
     // Honor reduced motion without making the visitor wait behind a still screen.
     if (reduced.matches) return;
     const previousFocus = document.activeElement;
@@ -46,7 +65,6 @@
       clearTimeout(finishTimer);
       document.removeEventListener('keydown', onKey);
       reduced.removeEventListener('change', onMotion);
-      if (once) { try { sessionStorage.setItem(seenKey, '1'); } catch {} }
       if (immediate) remove();
       else { overlay.classList.add('sq-intro-exit'); removeTimer = setTimeout(remove, 240); }
     }

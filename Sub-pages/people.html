@@ -3,21 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your people · Sidequest</title>
+  <title>Connections · Sidequest</title>
   <link rel="stylesheet" href="people.css">
+  <link rel="stylesheet" href="nav.css">
   <script src="people.js" defer></script>
 </head>
 
 <body>
-  <header class="page-header">
-    <a class="logo" href="./index.html">sidequest</a>
-    <a class="back-link" href="./index.html">Back to your circle</a>
+  <header class="page-header site-header">
+    <a class="logo" href="./index.html">sidequest <span class="logo-mark" aria-hidden="true">∞</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <details class="plan-menu">
+        <summary>Make a plan</summary>
+        <div class="plan-menu-panel">
+          <a class="plan-menu-item" href="./index.html?create=1"><span>Create a plan</span><small>Share an idea with your circle</small></a>
+          <a class="plan-menu-item" href="./planner.html"><span>Plan with Meta AI</span><small>Get an idea tailored to your interests</small></a>
+          <a class="plan-menu-item" href="./connect.html"><span>Plan together</span><small>Connect with friends and find your overlap</small></a>
+        </div>
+      </details>
+      <a class="header-link" href="./people.html" aria-current="page">Connections</a>
+      <a class="header-link" href="./calendar.html">My plans</a>
+    </nav>
+    <a class="profile-link" href="./profile.html">My profile</a>
   </header>
 
   <main>
     <section class="page-intro">
-      <p class="eyebrow">MAKE TIME FOR YOUR PEOPLE</p>
-      <h1>Your people.</h1>
+      <p class="eyebrow">MAKE TIME FOR YOUR CONNECTIONS</p>
+      <h1>Connections.</h1>
       <p>Shared interests. Small invitations. A little closer.</p>
     </section>
 
@@ -66,7 +79,7 @@
       </div>
 
       <div class="people-grid" id="people-grid"></div>
-      <p class="empty" id="empty-message" hidden>No matching people.</p>
+      <p class="empty" id="empty-message" hidden>No matching connections.</p>
 
       <p class="demo-note">
         Prototype: these are sample profiles.

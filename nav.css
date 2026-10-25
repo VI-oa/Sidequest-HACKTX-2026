@@ -1,0 +1,207 @@
+.site-header {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    width: min(100% - 32px, 720px);
+    gap: clamp(16px, 3vw, 36px);
+    margin-inline: auto;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--border, var(--line, #36363a));
+}
+
+.site-header .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+    color: var(--text, #f3f2ef);
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.site-header .logo-mark {
+    color: var(--muted, #a3a3ac);
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.site-header .logo[aria-current="page"] {
+    color: #dedde2;
+}
+
+.primary-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+.primary-nav .header-link,
+.plan-menu > summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    color: var(--muted, #a3a3ac);
+    font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.plan-menu {
+    position: relative;
+}
+
+.plan-menu > summary {
+    border: 1px solid var(--text, #f3f2ef);
+    background: var(--text, #f3f2ef);
+    color: var(--background, var(--bg, #0b0b0c));
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.plan-menu > summary::-webkit-details-marker {
+    display: none;
+}
+
+.primary-nav .header-link:hover,
+.plan-menu > summary:hover {
+    background: var(--surface, var(--panel, #202022));
+    color: var(--text, #f3f2ef);
+}
+
+.primary-nav .header-link[aria-current="page"] {
+    background: #29292c;
+    color: var(--text, #f3f2ef);
+}
+
+.primary-nav .plan-menu > summary[data-current="true"] {
+    border-color: #d4cfe0;
+}
+
+.plan-menu-item[aria-current="page"] {
+    background: #29292c;
+    color: var(--text, #f3f2ef);
+}
+
+.plan-menu[open] > summary {
+    border-color: var(--muted, #a3a3ac);
+    background: var(--surface, var(--panel, #202022));
+    color: var(--text, #f3f2ef);
+}
+
+.plan-menu-panel {
+    position: absolute;
+    z-index: 5;
+    top: calc(100% + 8px);
+    left: 0;
+    display: grid;
+    width: min(320px, calc(100vw - 32px));
+    gap: 4px;
+    padding: 8px;
+    border: 1px solid var(--border, var(--line, #36363a));
+    border-radius: 16px;
+    background: var(--surface, var(--panel, #202022));
+    box-shadow: 0 16px 40px rgb(0 0 0 / 35%);
+}
+
+.plan-menu-item {
+    display: grid;
+    width: 100%;
+    min-height: 0;
+    gap: 4px;
+    padding: 12px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text, #f3f2ef);
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.plan-menu-item:hover {
+    background: #303034;
+}
+
+.plan-menu-item small {
+    color: var(--muted, #a3a3ac);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.site-header .profile-link {
+    justify-self: end;
+    min-height: 44px;
+    padding: 11px 16px;
+    border: 1px solid var(--border, var(--line, #36363a));
+    border-radius: 999px;
+    color: var(--text, #f3f2ef);
+    font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.site-header .profile-link:hover {
+    border-color: var(--muted, #a3a3ac);
+    background: var(--surface, var(--panel, #202022));
+}
+
+.site-header .profile-link[aria-current="page"] {
+    border-color: #b8b6bf;
+    background: #29292c;
+}
+
+.plan-menu > summary:focus-visible,
+.plan-menu-item:focus-visible,
+.site-header .profile-link:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+    .site-header {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px 16px;
+    }
+
+    .primary-nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .site-header .profile-link {
+        grid-column: 2;
+        grid-row: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header {
+        width: calc(100% - 24px);
+        gap: 8px;
+    }
+
+    .primary-nav .header-link,
+    .plan-menu > summary {
+        padding-inline: 10px;
+        font-size: 13px;
+    }
+
+    .site-header .profile-link {
+        padding-inline: 13px;
+    }
+}
